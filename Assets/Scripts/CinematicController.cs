@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 [System.Serializable]
@@ -101,6 +102,7 @@ public class CinematicController : MonoBehaviour
         yield return new WaitForSeconds(0.7f);
 
         // (At this point, you can enable game UI or load first level)
+        SceneManager.LoadScene("SampleScene");
         Debug.Log("Cinematic finished.");
     }
 

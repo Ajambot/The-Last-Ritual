@@ -1,4 +1,3 @@
 repository "The Last Ritual/The Last Ritual@3574363521568@cloud"
   path "/"
-    br "/main"
-    co "/main"
+    smartbranch "/main" changeset "11"      

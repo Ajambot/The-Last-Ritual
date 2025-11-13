@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Debug.Log("Hello World");
         anim = GetComponent<Animator>();
     }
 
@@ -45,25 +44,21 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             anim.SetTrigger("Jump");
-            Debug.Log("Jumping");
             isGrounded = false;
         }
 
         // Attack
         if (Input.GetMouseButtonDown(0) && !anim.GetBool("attack"))
         {
-            Debug.Log("attacking");
             anim.SetTrigger("attack");
         }
 
         // Optional: Casting / Victory / Hurt triggers
         if (Input.GetKeyDown(KeyCode.C) && !anim.GetBool("casting")) {
-            Debug.Log("casting");
             anim.SetTrigger("casting");
         }
 
         if (Input.GetKeyDown(KeyCode.V) && !anim.GetBool("victory")) {
-            Debug.Log("victory");
             anim.SetTrigger("victory");
         }
     }
