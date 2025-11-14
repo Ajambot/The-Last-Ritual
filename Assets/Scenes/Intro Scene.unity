@@ -863,7 +863,7 @@ MonoBehaviour:
     sfx: {fileID: 0}
     startAmbience: 0
     stopAmbience: 0
-  - text: THE GREAT BINDING
+  - text: THE LAST RITUAL
     visibleTime: 4
     sfx: {fileID: 0}
     startAmbience: 0
