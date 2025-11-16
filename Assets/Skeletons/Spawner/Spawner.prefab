@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8068918005314114396
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6158882187206870402}
+  - component: {fileID: 7944977555912560345}
+  m_Layer: 0
+  m_Name: Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6158882187206870402
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8068918005314114396}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5, y: -1.45, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7944977555912560345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8068918005314114396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f5e25e250bae2748a651cf715c9274f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SkeletonRitualSpawner
+  ritualTimer: {fileID: 0}
+  swordSkeletonPrefab: {fileID: 4312154011429612495, guid: b49ab803b715a2d459e1e6adedd0f292, type: 3}
+  axeSkeletonPrefab: {fileID: 7092818023342481965, guid: 200dcbdc4efb1924f9d79c03c17b3cfc, type: 3}
+  shieldSkeletonPrefab: {fileID: 4285185016794505145, guid: 5b256a6435383f8438dd6ee4af12e680, type: 3}
+  spawnPoints: []
+  spawnInterval: 5
+  buffedMoveSpeed: 1
+  spawnClip: {fileID: 8300000, guid: 904414ee6c5c61f458f31c154c0b7c47, type: 3}
+  spawnVolume: 1

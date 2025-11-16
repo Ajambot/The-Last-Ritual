@@ -72,7 +72,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
@@ -127,12 +127,12 @@ TextureImporter:
       name: Torch Sprite Sheet 32x64_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 65
-        width: 21
-        height: 60
-      alignment: 9
-      pivot: {x: 2.186482, y: 2.2057374}
+        x: 0
+        y: 64
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -149,10 +149,10 @@ TextureImporter:
       name: Torch Sprite Sheet 32x64_1
       rect:
         serializedVersion: 2
-        x: 39
-        y: 58
-        width: 21
-        height: 66
+        x: 32
+        y: 64
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -171,10 +171,10 @@ TextureImporter:
       name: Torch Sprite Sheet 32x64_2
       rect:
         serializedVersion: 2
-        x: 70
-        y: 60
-        width: 20
-        height: 66
+        x: 64
+        y: 64
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,10 +193,10 @@ TextureImporter:
       name: Torch Sprite Sheet 32x64_3
       rect:
         serializedVersion: 2
-        x: 101
-        y: 65
-        width: 18
-        height: 62
+        x: 96
+        y: 64
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -212,35 +212,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Torch Sprite Sheet 32x64_4
-      rect:
-        serializedVersion: 2
-        x: 117
-        y: 106
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 904bd873670f19d20800000000000000
-      internalID: 3283669993858642953
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Torch Sprite Sheet 32x64_5
       rect:
         serializedVersion: 2
-        x: 5
-        y: 1
-        width: 23
-        height: 58
+        x: 32
+        y: 0
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,10 +237,10 @@ TextureImporter:
       name: Torch Sprite Sheet 32x64_6
       rect:
         serializedVersion: 2
-        x: 36
-        y: 1
-        width: 25
-        height: 53
+        x: 64
+        y: 0
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,10 +259,10 @@ TextureImporter:
       name: Torch Sprite Sheet 32x64_7
       rect:
         serializedVersion: 2
-        x: 68
-        y: 1
-        width: 23
-        height: 56
+        x: 96
+        y: 0
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -300,23 +278,23 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Torch Sprite Sheet 32x64_8
+      name: Torch Sprite Sheet 32x64_4
       rect:
         serializedVersion: 2
-        x: 102
-        y: 1
-        width: 20
-        height: 58
+        x: 0
+        y: 0
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8ff7190727fe59fd0800000000000000
-      internalID: -2335697556927840264
+      spriteID: cfcce216d754cbc4aa4571da2be9ab9e
+      internalID: 3283669993858642953
       vertices: []
       indices: 
       edges: []
@@ -333,7 +311,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Torch Sprite Sheet 32x64_0: 760846658683832962
       Torch Sprite Sheet 32x64_1: 2543744927541204565
@@ -343,7 +323,6 @@ TextureImporter:
       Torch Sprite Sheet 32x64_5: 3619981677231073785
       Torch Sprite Sheet 32x64_6: 7373791609346089328
       Torch Sprite Sheet 32x64_7: 4920396124008639895
-      Torch Sprite Sheet 32x64_8: -2335697556927840264
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
