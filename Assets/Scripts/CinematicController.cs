@@ -39,6 +39,8 @@ public class CinematicController : MonoBehaviour
     public float flickerMin = 0.02f;
     public float flickerMax = 0.18f;
 
+    public bool finalScene = true;
+
     void Awake()
     {
         if (cinematicTextObject == null) Debug.LogError("Assign cinematicTextObject in inspector");
@@ -102,7 +104,8 @@ public class CinematicController : MonoBehaviour
         yield return new WaitForSeconds(0.7f);
 
         // (At this point, you can enable game UI or load first level)
-        SceneManager.LoadScene("SampleScene");
+        if (!finalScene)
+            SceneManager.LoadScene("Act1");
         Debug.Log("Cinematic finished.");
     }
 

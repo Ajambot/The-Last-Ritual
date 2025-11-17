@@ -34,6 +34,7 @@ public class FinalBossController : MonoBehaviour
         hoverOffset = transform.position;
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
+        shootTimer = shootCooldown;
 
         if (audioSource == null)
             Debug.LogError("FatherMathias has no AudioSource component!");
@@ -99,7 +100,7 @@ public class FinalBossController : MonoBehaviour
 
         Rigidbody2D rb = proj.GetComponent<Rigidbody2D>();
         if (rb != null)
-            rb.velocity = dir * projectileSpeed;
+            rb.linearVelocity = dir * projectileSpeed;
     }
 
 

@@ -1,5 +1,6 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class RitualTimer : MonoBehaviour
 {
@@ -17,14 +18,38 @@ public class RitualTimer : MonoBehaviour
     public bool IsFinished { get; private set; }
     public float RemainingTime { get; private set; }
 
+    public AudioSource Music;
+    public AudioClip FinalBossMusic;
+    public GameObject fatherMathias;
+
+    public TextMeshProUGUI FatherMathiasText;
     float endTime;
+
+    // ✅ NEW METHOD
+    public void StartFinalRitual()
+    {
+        // optional safety so the ritual can’t be restarted
+        if (IsRunning || IsFinished) return;
+        FinalRitual = true;
+        fatherMathias.SetActive(true);
+        FatherMathiasText.text = "You cannot stop me, Lucien. I am the keeper of death!";
+        Music.clip = FinalBossMusic;
+        Music.loop = true;
+        Music.Play();
+        Invoke(nameof(ClearLine), 5.0f);
+    }
+
+    private void ClearLine()
+    {
+        FatherMathiasText.text = "";
+    }
 
     void Start()
     {
         if (timerText != null)
         {
             if (hideWhenNotRunning)
-                timerText.enabled = false;          // disable ONLY the text component
+                timerText.enabled = false;
             else
                 timerText.text = FormatTime(ritualDuration);
         }
@@ -37,7 +62,7 @@ public class RitualTimer : MonoBehaviour
         {
             if (FinalRitual)
             {
-                IsRunning  = true;
+                IsRunning = true;
                 IsFinished = false;
                 endTime = Time.time + ritualDuration;
 
@@ -57,9 +82,21 @@ public class RitualTimer : MonoBehaviour
 
             if (RemainingTime <= 0f)
             {
-                IsRunning  = false;
+                IsRunning = false;
                 IsFinished = true;
                 RemainingTime = 0f;
+                FinalBossController fbc = fatherMathias.GetComponent<FinalBossController>();
+                fbc.KillFromTimer();
+                FatherMathiasText.text = "The light… I see it now…";
+                Invoke(nameof(EndScene), 5f);
+                GameObject[] taggedObjects = GameObject.FindGameObjectsWithTag("Skeleton");
+
+                // Loop through each found GameObject
+                foreach (GameObject obj in taggedObjects)
+                {
+                    EnemyPatrolAndAttack epaa = obj.GetComponent<EnemyPatrolAndAttack>();
+                    epaa.Die();
+                }
 
                 if (timerText != null)
                 {
@@ -69,6 +106,11 @@ public class RitualTimer : MonoBehaviour
                 }
             }
         }
+    }
+
+    void EndScene()
+    {
+        SceneManager.LoadScene("Ending Scene");
     }
 
     string FormatTime(float t)

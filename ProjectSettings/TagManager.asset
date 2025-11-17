@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Relics
+  - Skeleton
   layers:
   - Default
   - TransparentFX

@@ -624,8 +624,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.003357, y: -0.0033264}
-  m_SizeDelta: {x: 776.66, y: 333.66}
+  m_AnchoredPosition: {x: -1885.3359, y: 6239.506}
+  m_SizeDelta: {x: 91761.766, y: 39421.656}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &555079996
 MonoBehaviour:
@@ -795,8 +795,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CinematicController
   cinematicTextObject: {fileID: 533335575}
   ambienceSource: {fileID: 1231494086}
-  chantSource: {fileID: 1804254563}
-  sfxSource: {fileID: 1978131711}
+  chantSource: {fileID: 0}
+  sfxSource: {fileID: 0}
   ambienceVolume: 0.507
   chantVolume: 0.355
   lines:
@@ -819,6 +819,7 @@ MonoBehaviour:
   flickerOverlay: {fileID: 555079996}
   flickerMin: 0.02
   flickerMax: 0.18
+  finalScene: 1
 --- !u!1 &1231494084
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,8 +983,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.003357, y: -0.0033264}
-  m_SizeDelta: {x: 776.66, y: 333.66}
+  m_AnchoredPosition: {x: -6561.6914, y: 5672.5977}
+  m_SizeDelta: {x: 114960.04, y: 43680.562}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1348292585
 MonoBehaviour:
@@ -1100,7 +1101,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 63624dba87c93554fb1f64ad3156aaf2, type: 3}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

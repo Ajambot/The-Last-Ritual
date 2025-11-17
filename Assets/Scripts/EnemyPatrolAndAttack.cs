@@ -29,7 +29,7 @@ public class EnemyPatrolAndAttack : MonoBehaviour
     public int swordKnockback = 1;
 
     [Header("Hurt")]
-    public AnimationClip hurtClip;   // assign SwordHurt clip in Inspector
+    public AnimationClip hurtClip;
     bool isHurting = false;
     float hurtTimer = 0f;
 
@@ -132,26 +132,26 @@ public class EnemyPatrolAndAttack : MonoBehaviour
 
     void Update()
     {
-#if UNITY_EDITOR
-    if (Input.GetKeyDown(KeyCode.H))
-    {
-        Debug.Log("Debug: enemy TakeDamage(1)");
-        TakeDamage(1);      // should play Hurt if health > 1
-    }
+//#if UNITY_EDITOR
+//    if (Input.GetKeyDown(KeyCode.H))
+//    {
+//        Debug.Log("Debug: enemy TakeDamage(1)");
+//        TakeDamage(1);      // should play Hurt if health > 1
+//    }
 
-    if (Input.GetKeyDown(KeyCode.K))
-    {
-        Debug.Log("Debug: enemy TakeDamage(999)");
-        TakeDamage(999);    // should go straight to Die
-    }
-#endif
+//    if (Input.GetKeyDown(KeyCode.K))
+//    {
+//        Debug.Log("Debug: enemy TakeDamage(999)");
+//        TakeDamage(999);    // should go straight to Die
+//    }
+//#endif
         if (dead) return;
         if (isHurting)
         {
             if (hurtTimer > 0f)
             {
                 hurtTimer -= Time.deltaTime;
-                HurtMovementOnly();   // stay still, do not chase or attack
+                HurtMovementOnly();
                 return;
             }
             else
@@ -168,7 +168,7 @@ public class EnemyPatrolAndAttack : MonoBehaviour
 
         if (movementMode == MovementMode.Tracking)
         {
-            // Boss-style: always aware if a player exists
+            //Boss-style: always aware if a player exists
             playerDetected = (player != null);
         }
         else
@@ -185,15 +185,14 @@ public class EnemyPatrolAndAttack : MonoBehaviour
             }
             else
             {
-                // Old behaviour: only detect while actually inside detectionRange
                 playerDetected = inDetectionRadius && player != null;
-                hasSeenPlayer = false; // reset, since we are not using it
+                hasSeenPlayer = false;
             }
         }
 
         AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
-        bool inHurtState = state.IsName("SwordHurt");    // must match your hurt state name
-        bool inAttackState = state.IsName("SwordAttack1"); // must match your attack state name
+        bool inHurtState = state.IsName("SwordHurt");
+        bool inAttackState = state.IsName("SwordAttack1");
 
 
         // While in the attack state: don't switch to patrol/chase, just let the animation play/loop
@@ -322,7 +321,7 @@ public class EnemyPatrolAndAttack : MonoBehaviour
             isHurting = true;
 
             // Play the hurt state immediately (same trick as death)
-            anim.Play("SwordHurt", 0, 0f);  // state name must match your hurt state
+            anim.Play("SwordHurt", 0, 0f);
             PlaySfx(hurtSfx);
 
             // Use clip length as stun duration (fallback if not assigned)
@@ -343,33 +342,35 @@ public class EnemyPatrolAndAttack : MonoBehaviour
     }
 
 
-    void Die()
+    public void Die()
     {
         if (dead) return;
         dead = true;
 
         // Force the death animation state immediately
-        anim.Play("SwordDie", 0, 0f);   // <-- state name must match your death state
+        anim.Play("SwordDie", 0, 0f);
         anim.SetBool("Dead", true);
         anim.SetBool("IsAttacking", false);
         anim.SetBool("IsMoving", false);
 
         PlaySfx(deathSfx);
+
         // Freeze physics where he died
         rb.linearVelocity = Vector2.zero;
         rb.gravityScale = 0f;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
 
-        // No more hits
+        // No more hits from his weapon
         if (swordHitbox) swordHitbox.enabled = false;
 
-        // Optional: let player walk through the bones
+        // Disable body collider so abilities don't see the corpse
         var col = GetComponent<Collider2D>();
-        if (col) col.isTrigger = true;
+        if (col) col.enabled = false;
 
         // IMPORTANT: stop this script from running Update/LateUpdate after death
         this.enabled = false;
     }
+
 
     public void EnableSwordHitbox()
     {
@@ -405,7 +406,7 @@ public class EnemyPatrolAndAttack : MonoBehaviour
         if (swordHitbox == null) return;
 
         var state = anim.GetCurrentAnimatorStateInfo(0);
-        bool inAttack = state.IsName("SwordAttack1");   // must match your attack state name
+        bool inAttack = state.IsName("SwordAttack1");
 
         if (!inAttack && swordHitbox.enabled)
         {

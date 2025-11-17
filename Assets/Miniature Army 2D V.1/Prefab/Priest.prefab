@@ -442,6 +442,8 @@ MonoBehaviour:
   targetTilemap: {fileID: 0}
   woodTile: {fileID: 0}
   fireAnimatedTile: {fileID: 0}
+  deathSfx: {fileID: 0}
+  deathVolume: 1
   burnSeconds: 1.2
   interactKey: 101
   maxTilesAhead: 2
@@ -558,6 +560,8 @@ MonoBehaviour:
   targetTilemap: {fileID: 0}
   woodTile: {fileID: 0}
   fireAnimatedTile: {fileID: 0}
+  deathSfx: {fileID: 8300000, guid: 18a3d760dbef2ae40b3ad80367d82d2b, type: 3}
+  deathVolume: 1
   burnSeconds: 1.2
   interactKey: 101
   maxTilesAhead: 2

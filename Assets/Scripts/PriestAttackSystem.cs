@@ -137,14 +137,21 @@ public class PriestAttackSystem : MonoBehaviour
     {
         isAttacking = true;
         isAOEAttacking = true;
-        
+
         Debug.Log("💥 AOE ATTACK ACTIVATED! Holy burst unleashed!");
-        
+
         // Trigger animation if animator exists
         if (animator != null)
         {
             animator.SetTrigger(CastingTrigger);
         }
+
+        PlayerController pc = GetComponent<PlayerController>();
+        if (pc)
+        {
+            pc.HealToFull();
+        }
+
         
         // Spawn visual effect
         if (aoeEffectPrefab != null)

@@ -147,7 +147,7 @@ MonoBehaviour:
   attackSfx: {fileID: 8300000, guid: 451259bfeb6da0b44b215f47bc4c6b6b, type: 3}
   hurtSfx: {fileID: 8300000, guid: 328526b971ce688418055548b912e8db, type: 3}
   deathSfx: {fileID: 8300000, guid: ad407b8ae10aa1d43a8ca1f8ed068b2e, type: 3}
-  sfxVolume: 0.503
+  sfxVolume: 0.253
 --- !u!50 &1779084386597098363
 Rigidbody2D:
   serializedVersion: 5

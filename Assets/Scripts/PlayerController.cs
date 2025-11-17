@@ -1,28 +1,39 @@
 ﻿using UnityEngine;
 using UnityEngine.Tilemaps; // <-- needed for Tilemap access
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
+
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float moveSpeed = 3f;
     public float jumpForce = 6f;
 
+    //private int health = 100;
     private int health = 100;
+    public int Health => health;   // ADD THIS
+
 
     private Rigidbody2D rb;
     private Animator anim;
     private bool isGrounded = true;
     private bool isFacingRight = false;
+    private bool isDead;
 
     [Header("Wood Burn Settings")]
     public Tilemap targetTilemap;      // The Tilemap you painted wood on (Decor/Foreground/etc.)
     public TileBase woodTile;          // Wood_Tile
     public TileBase fireAnimatedTile;  // Fire_AnimatedTile
 
+    [Header("Audio")]
+    public AudioClip deathSfx;
+    [Range(0f, 1f)] public float deathVolume = 1f;
+
     void Start()
     {
+        isDead = false;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
@@ -34,32 +45,93 @@ public class PlayerController : MonoBehaviour
     public int burnRadius = 0;         // 0 = only that tile; 1 = also its neighbors, etc.
     public float probeFromFeet = 0.2f; // Vertical offset up from feet when probing
 
+    //void Update()
+    //{
+    //    if (health <= 0)
+    //    {
+    //        anim.SetTrigger("die");
+    //        //Debug.Log("Im dead");
+    //    }
+    //    float moveInput = Input.GetAxisRaw("Horizontal");
+    //    rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+
+    //    anim.SetBool("isWalking", moveInput != 0);
+
+    //    // Flip character if needed
+    //    if (moveInput > 0)
+    //    {
+    //        isFacingRight = true;
+    //        Vector3 localScale = transform.localScale;
+    //        localScale.x = -1f;
+    //        transform.localScale = localScale;
+    //    }
+    //    else if (moveInput < 0)
+    //    {
+    //        isFacingRight = false;
+    //        Vector3 localScale = transform.localScale;
+    //        localScale.x = 1f;
+    //        transform.localScale = localScale;
+    //    }
+
+    //    // Jump
+    //    if (Input.GetButtonDown("Jump") && isGrounded)
+    //    {
+    //        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+    //        isGrounded = false;
+    //    }
+
+
+    //    // Optional casting / victory
+    //    if (Input.GetKeyDown(KeyCode.C) && !anim.GetBool("casting"))
+    //        anim.SetTrigger("casting");
+    //    if (Input.GetKeyDown(KeyCode.V) && !anim.GetBool("victory"))
+    //        anim.SetTrigger("victory");
+
+    //    // 🔥 Interact key for burning wood
+    //    if (Input.GetKeyDown(interactKey))
+    //        TryBurnWood();
+    //}
     void Update()
     {
+        // stop all control after death
+        if (isDead)
+        {
+            Debug.Log("Dead");
+            return;
+        }
+
+        // death check
         if (health <= 0)
         {
-            anim.SetTrigger("die");
-            //Debug.Log("Im dead");
+            Die();
+            isDead = true;
+            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            return;
         }
+
         float moveInput = Input.GetAxisRaw("Horizontal");
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
 
         anim.SetBool("isWalking", moveInput != 0);
 
         // Flip character if needed
-        if (moveInput > 0)
+        Debug.Log("HERE" + isDead);
+        if (!isDead)
         {
-            isFacingRight = true;
-            Vector3 localScale = transform.localScale;
-            localScale.x = -1f;
-            transform.localScale = localScale;
-        }
-        else if (moveInput < 0)
-        {
-            isFacingRight = false;
-            Vector3 localScale = transform.localScale;
-            localScale.x = 1f;
-            transform.localScale = localScale;
+            if (moveInput > 0)
+            {
+                isFacingRight = true;
+                Vector3 localScale = transform.localScale;
+                localScale.x = -1f;
+                transform.localScale = localScale;
+            }
+            else if (moveInput < 0)
+            {
+                isFacingRight = false;
+                Vector3 localScale = transform.localScale;
+                localScale.x = 1f;
+                transform.localScale = localScale;
+            }
         }
 
         // Jump
@@ -68,7 +140,6 @@ public class PlayerController : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             isGrounded = false;
         }
-
 
         // Optional casting / victory
         if (Input.GetKeyDown(KeyCode.C) && !anim.GetBool("casting"))
@@ -133,6 +204,34 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    void Die()
+    {
+        if (isDead) return;
+
+        anim.SetTrigger("die");
+        Debug.Log(isDead);
+
+        // play death sound
+        if (deathSfx != null)
+            AudioSource.PlayClipAtPoint(deathSfx, transform.position, deathVolume);
+
+        // wait long enough for the sound (and at least 1s)
+        float delay = 1.0f;
+        if (deathSfx != null)
+            delay = Mathf.Max(delay, deathSfx.length);
+
+        StartCoroutine(ReloadSceneAfterDelay(delay));
+    }
+
+
+
+    System.Collections.IEnumerator ReloadSceneAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        var scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.buildIndex);   // reload current scene
+    }
 
 
 
@@ -151,13 +250,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Flip()
+    public void HealToFull()
     {
-        Debug.Log("Flip");
-        isFacingRight = !isFacingRight;
-        Vector3 localScale = transform.localScale;
-        localScale.x *= -1f;
-        transform.localScale = localScale;
+        health = 100;
     }
 
     public void Damage(int dmg)
